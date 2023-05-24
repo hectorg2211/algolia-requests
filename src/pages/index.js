@@ -13,6 +13,8 @@ const searchClient = algoliasearch(
   'a424e354432ff6b7a1da7878bdddb134'
 )
 
+let timerId = undefined
+
 function IndexPage() {
   const [activeSearch, setActiveSearch] = useState(false)
 
@@ -43,7 +45,7 @@ function SearchItems({ activeSearch, setActiveSearch }) {
         Hide search results
       </button>
 
-      <SearchBox />
+      <SearchBox queryHook={queryHook} />
 
       <h1>Products index</h1>
       <Index indexName='Products'>
@@ -60,6 +62,14 @@ function SearchItems({ activeSearch, setActiveSearch }) {
 
 function Hit({ hit }) {
   return JSON.stringify(hit)
+}
+
+function queryHook(query, search) {
+  if (timerId) {
+    clearTimeout(timerId)
+  }
+
+  timerId = setTimeout(() => search(query), 500)
 }
 
 export default IndexPage
