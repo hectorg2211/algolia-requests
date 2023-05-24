@@ -5,6 +5,7 @@ import {
   SearchBox,
   Hits,
   Index,
+  Configure,
 } from 'react-instantsearch-hooks-web'
 
 const searchClient = algoliasearch(
@@ -17,28 +18,42 @@ function IndexPage() {
 
   return (
     <InstantSearch indexName='Products' searchClient={searchClient}>
-      <div style={{ display: 'flex' }}>
-        <SearchBox />
-
-        <button onClick={() => setActiveSearch(!activeSearch)}>
-          {activeSearch ? 'Deactivate search' : 'Activate search'}
-        </button>
-      </div>
-
-      {activeSearch && (
-        <>
-          <h1>Products index</h1>
-          <Index indexName='Products'>
-            <Hits hitComponent={Hit} />
-          </Index>
-
-          <h1>Recipes index</h1>
-          <Index indexName='Recipes'>
-            <Hits hitComponent={Hit} />
-          </Index>
-        </>
-      )}
+      <SearchItems
+        activeSearch={activeSearch}
+        setActiveSearch={setActiveSearch}
+      />
     </InstantSearch>
+  )
+}
+
+function SearchItems({ activeSearch, setActiveSearch }) {
+  if (!activeSearch) {
+    return (
+      <button onClick={() => setActiveSearch(!activeSearch)}>
+        Show search results
+      </button>
+    )
+  }
+
+  return (
+    <>
+      <button onClick={() => setActiveSearch(!activeSearch)}>
+        Hide search results
+      </button>
+
+      <Configure analytics={true} clickAnalytics={true} hitsPerPage={6} />
+      <SearchBox />
+
+      <h1>Products index</h1>
+      <Index indexName='Products'>
+        <Hits hitComponent={Hit} />
+      </Index>
+
+      <h1>Recipes index</h1>
+      <Index indexName='Recipes'>
+        <Hits hitComponent={Hit} />
+      </Index>
+    </>
   )
 }
 
