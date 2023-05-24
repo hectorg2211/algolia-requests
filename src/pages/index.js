@@ -18,6 +18,8 @@ function IndexPage() {
 
   return (
     <InstantSearch indexName='Products' searchClient={searchClient}>
+      <Configure analytics={true} clickAnalytics={true} hitsPerPage={6} />
+
       <SearchItems
         activeSearch={activeSearch}
         setActiveSearch={setActiveSearch}
@@ -41,7 +43,6 @@ function SearchItems({ activeSearch, setActiveSearch }) {
         Hide search results
       </button>
 
-      <Configure analytics={true} clickAnalytics={true} hitsPerPage={6} />
       <SearchBox />
 
       <h1>Products index</h1>
