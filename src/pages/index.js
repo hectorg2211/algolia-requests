@@ -9,8 +9,8 @@ import {
 } from 'react-instantsearch-hooks-web'
 
 const searchClient = algoliasearch(
-  'I1HBSM55X2',
-  'a424e354432ff6b7a1da7878bdddb134'
+  'SV12BSVNSA',
+  '120f0ba56d4c007e710cba41d3fe654f'
 )
 
 let timerId = undefined
@@ -48,12 +48,17 @@ function SearchItems({ activeSearch, setActiveSearch }) {
       <SearchBox queryHook={queryHook} />
 
       <h1>Products index</h1>
-      <Index indexName='Products'>
+      <Index indexName='products_v2'>
         <Hits hitComponent={Hit} />
       </Index>
 
       <h1>Recipes index</h1>
-      <Index indexName='Recipes'>
+      <Index indexName='normal_recipes'>
+        <Hits hitComponent={Hit} />
+      </Index>
+
+      <h1>Blog posts</h1>
+      <Index indexName='blog_posts'>
         <Hits hitComponent={Hit} />
       </Index>
     </>
