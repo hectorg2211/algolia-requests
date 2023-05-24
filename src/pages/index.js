@@ -19,7 +19,7 @@ function IndexPage() {
   const [activeSearch, setActiveSearch] = useState(false)
 
   return (
-    <InstantSearch indexName='Products' searchClient={searchClient}>
+    <InstantSearch indexName='normal_recipes' searchClient={searchClient}>
       <Configure analytics={true} clickAnalytics={true} hitsPerPage={6} />
 
       <SearchItems
